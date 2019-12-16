@@ -52,8 +52,16 @@ def two_loops(N: List[int]) -> List[int]:
     - Calculate the product of all items after item i
     - For each item i, multiply the products for before and after i
 
-    N = [3, 7, 1, 4, 8, 9]
-    i = [0, 1, 2, 3, 4, 5]
+    L[i] = N[i-1] * L[i-1] if i != 0 else 1
+    R[j] = N[j+1] * R[j+1] if j != (len(N) - 1) else 1
+    A[i] = L[i] * R[i]
+
+    N[0] = 3
+    N[1] = 7
+    N[2] = 1
+    N[3] = 4
+    N[4] = 8
+    N[5] = 9
 
     L[0] = 1 = 1
     L[1] = (1) * 3 = 3
@@ -62,25 +70,23 @@ def two_loops(N: List[int]) -> List[int]:
     L[4] = (21) * 4 = 84
     L[5] = (84) * 8 = 672
 
-    R[0] = (288) * 7 = 2016
-    R[1] = (288) * 1 = 288
-    R[2] = (72) * 4 = 288
-    R[3] = (9) * 8 = 72
-    R[4] = (1) * 9 = 9
     R[5] = 1 = 1
+    R[4] = (1) * 9 = 9
+    R[3] = (9) * 8 = 72
+    R[2] = (72) * 4 = 288
+    R[1] = (288) * 1 = 288
+    R[0] = (288) * 7 = 2016
 
     A = [L[0]*R[0], L[1]*R[1], L[2]*R[2], L[3]*R[3], L[4]*R[4], L[5]*R[5]]
     A = [2016, 864, 6048, 1512, 756, 672]
-    i = [   0,   1,    2,    3,   4,   5]
     """
 
     items_len = len(N)
     of_left = [1 for _ in range(items_len)]
     of_right = [1 for _ in range(items_len)]
     for i in range(items_len):
-        j = (items_len - 1) - i  # Invert i, start counting from len(N) to 0.
-        if i != 0:
-            of_left[i] = N[i-1] * of_left[i-1]
-            of_right[j] = N[j+1] * of_right[j+1]
+        j = (items_len - 1) - i  # Invert i; start counting from len(N) to 0.
+        of_left[i] = N[i-1] * of_left[i-1] if i != 0 else 1
+        of_right[j] = N[j+1] * of_right[j+1] if i != 0 else 1
 
     return list(map(lambda p: p[0] * p[1], zip(of_left, of_right)))
