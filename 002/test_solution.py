@@ -9,7 +9,7 @@ from solution import solve
 @dataclass
 class Case:
     arg: List[int]
-    answer: List[int]
+    want: List[int]
 
 
 def test_solve():
@@ -24,4 +24,4 @@ def test_solve():
     ]
 
     for c in cases:
-        assert solve(c.arg) == c.answer
+        assert solve(c.arg) == c.want

@@ -9,7 +9,7 @@ from solution import solve
 @dataclass
 class Case:
     args: Tuple[List[int], int]
-    answer: bool
+    want: bool
 
 
 def test_solve():
@@ -22,4 +22,4 @@ def test_solve():
     ]
 
     for c in cases:
-        assert solve(*c.args) == c.answer
+        assert solve(*c.args) == c.want
