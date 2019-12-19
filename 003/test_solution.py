@@ -13,8 +13,8 @@ def test_serialize():
         want: str
 
     cases: List[Case] = [
-        Case(Node('P', Node('L', Node('L.L')), Node('R')), 'P,L,R,L.L'),
-        Case(Node(''), ''),
+        Case(Node('P', Node('L', Node('L.L')), Node('R')), 'P,L,L.L,#,#,#,R,#,#'),
+        Case(Node(''), ',#,#'),
     ]
 
     for c in cases:
@@ -28,8 +28,8 @@ def test_deserialize():
         want: Node
 
     cases: List[Case] = [
-        Case('P,L,R,L.L', Node('P', Node('L', Node('L.L')), Node('R'))),
-        Case('', Node('')),
+        Case('P,L,L.L,#,#,#,R,#,#', Node('P', Node('L', Node('L.L')), Node('R'))),
+        Case(',#,#', Node('')),
     ]
 
     for c in cases:
