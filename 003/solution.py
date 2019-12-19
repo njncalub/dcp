@@ -1,3 +1,7 @@
+NODE_EMPTY_VALUE = '#'
+NODE_VALUE_SEPARATOR = ','
+
+
 class Node:
     """Represents a node in a binary tree."""
 
@@ -17,7 +21,10 @@ def serialize(N: Node) -> str:
         A stringified representation of a Node object.
     """
 
-    return ''
+    if not node:
+        return NODE_EMPTY_VALUE
+
+    return NODE_VALUE_SEPARATOR.join((node.val, serialize(node.left), serialize(node.right)))
 
 
 def deserialize(S: str) -> Node:
@@ -30,4 +37,17 @@ def deserialize(S: str) -> Node:
         A Node parsed from the string S.
     """
 
-    return Node('')
+    it = iter(s.split(NODE_VALUE_SEPARATOR))
+
+    def parse():
+        val = next(it)
+        if val is NODE_EMPTY_VALUE:
+            return None
+
+        node = Node(val)
+        node.left = parse()
+        node.right = parse()
+
+        return node
+
+    return parse()
