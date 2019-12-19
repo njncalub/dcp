@@ -21,10 +21,10 @@ def serialize(N: Node) -> str:
         A stringified representation of a Node object.
     """
 
-    if not node:
+    if not  N:
         return NODE_EMPTY_VALUE
 
-    return NODE_VALUE_SEPARATOR.join((node.val, serialize(node.left), serialize(node.right)))
+    return NODE_VALUE_SEPARATOR.join((N.val, serialize(N.left), serialize(N.right)))
 
 
 def deserialize(S: str) -> Node:
@@ -37,7 +37,7 @@ def deserialize(S: str) -> Node:
         A Node parsed from the string S.
     """
 
-    it = iter(s.split(NODE_VALUE_SEPARATOR))
+    it = iter(S.split(NODE_VALUE_SEPARATOR))
 
     def parse():
         val = next(it)
