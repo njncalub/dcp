@@ -1,9 +1,9 @@
 import pytest
 
-from solution import Node, serialize, deserialize
+from dataclasses import dataclass
 from typing import List
 
-from dataclasses import dataclass
+from solution import deserialize, Node, serialize
 
 
 def test_serialize():
